@@ -133,6 +133,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4950540127446328}
   - component: {fileID: 54279041309456356}
+  - component: {fileID: 114329485089042274}
   m_Layer: 0
   m_Name: Skateboard
   m_TagString: Untagged
@@ -511,7 +512,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1563451442341916}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalPosition: {x: 0, y: 3.11, z: -6.51}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 4464720526119912}
@@ -692,7 +693,7 @@ BoxCollider:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1119482848736038}
-  m_Material: {fileID: 0}
+  m_Material: {fileID: 13400000, guid: dd44e3871cd1215458ce5e5f097b37f7, type: 2}
   m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 2
@@ -704,7 +705,7 @@ BoxCollider:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1798924171555246}
-  m_Material: {fileID: 0}
+  m_Material: {fileID: 13400000, guid: dd44e3871cd1215458ce5e5f097b37f7, type: 2}
   m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 2
@@ -746,13 +747,24 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 0.545546, y: 0.02478677, z: 0.24}
   m_Center: {x: 0, y: 0, z: -0.12}
+--- !u!114 &114329485089042274
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1563451442341916}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 14b6f243d6a083e438a16b10326d8b95, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!135 &135564470455831254
 SphereCollider:
   m_ObjectHideFlags: 1
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1183390464139562}
-  m_Material: {fileID: 0}
+  m_Material: {fileID: 13400000, guid: dd44e3871cd1215458ce5e5f097b37f7, type: 2}
   m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 2
@@ -764,7 +776,7 @@ SphereCollider:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1914995244859740}
-  m_Material: {fileID: 0}
+  m_Material: {fileID: 13400000, guid: dd44e3871cd1215458ce5e5f097b37f7, type: 2}
   m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 2
@@ -776,7 +788,7 @@ SphereCollider:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1615875892193576}
-  m_Material: {fileID: 0}
+  m_Material: {fileID: 13400000, guid: dd44e3871cd1215458ce5e5f097b37f7, type: 2}
   m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 2
@@ -788,7 +800,7 @@ SphereCollider:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1182340017277418}
-  m_Material: {fileID: 0}
+  m_Material: {fileID: 13400000, guid: dd44e3871cd1215458ce5e5f097b37f7, type: 2}
   m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 2
