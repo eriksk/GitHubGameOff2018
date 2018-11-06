@@ -454,7 +454,7 @@ Transform:
   - {fileID: 4042659985083454}
   m_Father: {fileID: 4293812864576394}
   m_RootOrder: 0
-  m_LocalEulerAnglesHint: {x: -163.781, y: 12.826996, z: -16.940002}
+  m_LocalEulerAnglesHint: {x: -163.061, y: 16.946, z: -7.372986}
 --- !u!4 &4042659985083454
 Transform:
   m_ObjectHideFlags: 1
@@ -470,7 +470,7 @@ Transform:
   - {fileID: 4745864974909764}
   m_Father: {fileID: 4030990195949520}
   m_RootOrder: 0
-  m_LocalEulerAnglesHint: {x: 11.793, y: -9.5060005, z: -5.4080005}
+  m_LocalEulerAnglesHint: {x: 19.825, y: -8.107, z: 3.3100002}
 --- !u!4 &4056249743584502
 Transform:
   m_ObjectHideFlags: 1
@@ -566,7 +566,7 @@ Transform:
   - {fileID: 4030990195949520}
   m_Father: {fileID: 4917532931192234}
   m_RootOrder: 2
-  m_LocalEulerAnglesHint: {x: 33.975002, y: -27.815, z: 0}
+  m_LocalEulerAnglesHint: {x: 30.329002, y: -18.212002, z: -17.898}
 --- !u!4 &4334455280897222
 Transform:
   m_ObjectHideFlags: 1
@@ -1049,9 +1049,10 @@ MonoBehaviour:
   LeftFoot: {fileID: 4663569885578514}
   RightFoot: {fileID: 4576430380718426}
   RagdollRoot: {fileID: 4917532931192234}
+  CamController: {fileID: 0}
   State: 0
   ConnectToSkateboard: 1
-  FeetStickyBreakForce: 500
+  FeetStickyBreakForce: 450
   SpinForce: 100
   PitchForce: 100
   JumpForce: 10

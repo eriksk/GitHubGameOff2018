@@ -512,7 +512,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1563451442341916}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -17.59428, y: 14.65, z: 111.064}
+  m_LocalPosition: {x: 0, y: 227.12, z: -237.92}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 4464720526119912}
@@ -763,20 +763,25 @@ MonoBehaviour:
   - Name: 
     Model: {fileID: 4821209847742990}
     Grounded: 0
+    GroundNormal: {x: 0, y: 0, z: 0}
   - Name: 
     Model: {fileID: 4589459107393958}
     Grounded: 0
+    GroundNormal: {x: 0, y: 0, z: 0}
   - Name: 
     Model: {fileID: 4162871568021618}
     Grounded: 0
+    GroundNormal: {x: 0, y: 0, z: 0}
   - Name: 
     Model: {fileID: 4202776390343912}
     Grounded: 0
+    GroundNormal: {x: 0, y: 0, z: 0}
   Ground:
     serializedVersion: 2
     m_Bits: 512
   GroundCheckDistance: 0.2
   Grounded: 0
+  AirTime: 0
 --- !u!135 &135564470455831254
 SphereCollider:
   m_ObjectHideFlags: 1

@@ -13,6 +13,8 @@ public class Skateboard : MonoBehaviour
 
     public bool Grounded;
 
+    public float AirTime;
+
     void Start()
     {
         _rigidbody = GetComponent<Rigidbody>();
@@ -32,6 +34,20 @@ public class Skateboard : MonoBehaviour
                 Grounded = true;
             }
         }
+
+        if(Grounded && AirTime > 2f)
+        {
+            ObjectLocator.Stats.Landed(transform.position, AirTime);
+        }
+
+        if(!Grounded)
+        {
+            AirTime += Time.deltaTime;
+        }
+        if(Grounded)
+        {
+            AirTime = 0f;
+        }
     }
 
     void FixedUpdate()
@@ -48,14 +64,14 @@ public class Skateboard : MonoBehaviour
             var velocityMag = velocity.magnitude;
 
             var lateralDirection = Vector3.Cross(transform.forward, velocityDirection);
-            lateralDirection = Vector3.Cross(transform.forward, lateralDirection);
             var lateralMag = Vector3.Dot(transform.forward, lateralDirection);
+            lateralDirection = Vector3.Cross(transform.forward, lateralDirection);
 
             // Debug.DrawLine(wheel.Model.position, wheel.Model.position + lateralDirection, Color.red, 0.1f);
             _rigidbody.AddForceAtPosition(
                 lateralDirection * 
                 velocityMag *
-                30f * 
+                50f * 
                 lateralMag * 
                 _rigidbody.mass, wheel.Model.position);
                 

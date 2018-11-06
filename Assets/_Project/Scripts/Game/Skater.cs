@@ -10,6 +10,7 @@ public class Skater : MonoBehaviour
     public RagdollAnimator RagdollAnimator;
     public Skateboard Skateboard;
     public Transform LeftFoot, RightFoot, RagdollRoot;
+    public CameraController CamController;
 
     public SkaterState State;
     public bool ConnectToSkateboard = true;
@@ -27,6 +28,14 @@ public class Skater : MonoBehaviour
     private FixedJoint[] _boardJoints;
 
     private Rigidbody[] _rigidbodies;
+
+    public Vector3 CurrentPosition
+    {
+        get
+        {
+            return _rootRigidbody.position;
+        }
+    }
 
     void Start()
     {
@@ -65,6 +74,7 @@ public class Skater : MonoBehaviour
             .Select(x => x.gameObject.GetComponent<Rigidbody>())
             .Where(x => x != null)
             .ToArray();
+
     }
 
     public void OnCollisionEnter(Collision collision)
@@ -74,6 +84,9 @@ public class Skater : MonoBehaviour
 
     public void Fall()
     {
+        // TODO: Calculate center of character instead
+        CamController.Target = _rootRigidbody;
+        ObjectLocator.Stats.PlayerFallen();
         State = SkaterState.Fallen;
         transform.SetParent(null);
         RagdollAnimator.Pinned = false; // Ragdoll on
@@ -86,6 +99,8 @@ public class Skater : MonoBehaviour
 
     public void Jump()
     {
+        if(!Skateboard.Grounded) return;
+
         var rigidbody = Skateboard.GetComponent<Rigidbody>();
         rigidbody.AddForce(new Vector3(0f, 1f, 0f) * JumpForce * rigidbody.mass, ForceMode.Impulse);
 
