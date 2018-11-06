@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 
 public class Skater : MonoBehaviour
@@ -12,6 +13,7 @@ public class Skater : MonoBehaviour
 
     public SkaterState State;
     public bool ConnectToSkateboard = true;
+    public float FeetStickyBreakForce = 15f;
 
     public float SpinForce = 1f;
     public float PitchForce = 1f;
@@ -23,6 +25,8 @@ public class Skater : MonoBehaviour
     private float _leanVertical;
 
     private FixedJoint[] _boardJoints;
+
+    private Rigidbody[] _rigidbodies;
 
     void Start()
     {
@@ -51,10 +55,16 @@ public class Skater : MonoBehaviour
             foreach(var joint in _boardJoints)
             {
                 joint.connectedBody = Skateboard.GetComponent<Rigidbody>();
+                joint.breakForce = FeetStickyBreakForce;
             }
         }
 
         _rootRigidbody = RagdollAnimator.Ragdoll.GetComponentInChildren<Rigidbody>();
+        _rigidbodies = RagdollAnimator.Ragdoll
+            .ChildrenDeep()
+            .Select(x => x.gameObject.GetComponent<Rigidbody>())
+            .Where(x => x != null)
+            .ToArray();
     }
 
     public void OnCollisionEnter(Collision collision)
@@ -64,7 +74,7 @@ public class Skater : MonoBehaviour
 
     public void Fall()
     {
-        State = SkaterState.OnBoard;
+        State = SkaterState.Fallen;
         transform.SetParent(null);
         RagdollAnimator.Pinned = false; // Ragdoll on
         foreach(var joint in _boardJoints)
@@ -78,10 +88,18 @@ public class Skater : MonoBehaviour
     {
         var rigidbody = Skateboard.GetComponent<Rigidbody>();
         rigidbody.AddForce(new Vector3(0f, 1f, 0f) * JumpForce * rigidbody.mass, ForceMode.Impulse);
+
+        foreach(var body in _rigidbodies)
+        {
+            body.AddForce(new Vector3(0f, 1f, 0f) * JumpForce * body.mass, ForceMode.Impulse);
+        }
     }
 
     void FixedUpdate()
     {
+        if(State == SkaterState.Fallen)
+            return;
+
         var rigidbody = Skateboard.GetComponent<Rigidbody>();
 
         rigidbody.AddRelativeTorque(new Vector3(0f, 1f, 0f) * _leanHorizontal * SpinForce);
@@ -90,6 +108,25 @@ public class Skater : MonoBehaviour
 
     void Update()
     {
+        if(State == SkaterState.OnBoard)
+        {
+            RagdollAnimator.Pinned = Skateboard.Grounded;
+
+            if(_boardJoints.All(x => x == null))
+            {
+                Fall();
+            }
+        }
+
+        
+        if(State == SkaterState.Fallen)
+        {
+            _leanVertical = 0f;
+            _leanHorizontal = 0f;
+            UpdateAnimatorParameters();
+            return;
+        }
+
         _leanVertical = Input.GetAxis("Vertical");
         _leanHorizontal = Input.GetAxis("Horizontal");
 

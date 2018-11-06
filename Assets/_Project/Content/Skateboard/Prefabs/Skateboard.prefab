@@ -70,7 +70,7 @@ GameObject:
   - component: {fileID: 4162871568021618}
   - component: {fileID: 135716867916769750}
   m_Layer: 0
-  m_Name: w1 (1)
+  m_Name: back_left
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -86,7 +86,7 @@ GameObject:
   - component: {fileID: 4821209847742990}
   - component: {fileID: 135564470455831254}
   m_Layer: 0
-  m_Name: w1 (3)
+  m_Name: front_left
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -151,7 +151,7 @@ GameObject:
   - component: {fileID: 4589459107393958}
   - component: {fileID: 135677935967392610}
   m_Layer: 0
-  m_Name: w1 (2)
+  m_Name: front_right
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -279,7 +279,7 @@ GameObject:
   - component: {fileID: 4202776390343912}
   - component: {fileID: 135634233372930364}
   m_Layer: 0
-  m_Name: w1
+  m_Name: back_right
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -512,7 +512,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1563451442341916}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -15.93, y: 223.48, z: -220.92}
+  m_LocalPosition: {x: -17.59428, y: 14.65, z: 111.064}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 4464720526119912}
@@ -655,9 +655,9 @@ Rigidbody:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1563451442341916}
   serializedVersion: 2
-  m_Mass: 3
+  m_Mass: 5
   m_Drag: 0
-  m_AngularDrag: 1
+  m_AngularDrag: 0
   m_UseGravity: 1
   m_IsKinematic: 0
   m_Interpolate: 1
@@ -758,6 +758,25 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 14b6f243d6a083e438a16b10326d8b95, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  Speed: 0
+  Wheels:
+  - Name: 
+    Model: {fileID: 4821209847742990}
+    Grounded: 0
+  - Name: 
+    Model: {fileID: 4589459107393958}
+    Grounded: 0
+  - Name: 
+    Model: {fileID: 4162871568021618}
+    Grounded: 0
+  - Name: 
+    Model: {fileID: 4202776390343912}
+    Grounded: 0
+  Ground:
+    serializedVersion: 2
+    m_Bits: 512
+  GroundCheckDistance: 0.2
+  Grounded: 0
 --- !u!135 &135564470455831254
 SphereCollider:
   m_ObjectHideFlags: 1

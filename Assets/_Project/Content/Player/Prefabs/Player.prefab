@@ -1051,7 +1051,8 @@ MonoBehaviour:
   RagdollRoot: {fileID: 4917532931192234}
   State: 0
   ConnectToSkateboard: 1
-  SpinForce: 500
+  FeetStickyBreakForce: 500
+  SpinForce: 100
   PitchForce: 100
   JumpForce: 10
 --- !u!114 &114968097151846816
