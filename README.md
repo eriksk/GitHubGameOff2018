@@ -1,37 +1,15 @@
-## Welcome to GitHub Pages
+## Useless Skater - GitHub Game Off 2018 Entry
 
-You can use the [editor on GitHub](https://github.com/eriksk/GitHubGameOff2018/edit/master/README.md) to maintain and preview the content for your website in Markdown files.
+**Useless Skater** is a Skateboarding Ski Jump game. Try to jump as far as you can, just be sure to stick the landing or it will hurt, a lot!
 
-Whenever you commit to this repository, GitHub Pages will run [Jekyll](https://jekyllrb.com/) to rebuild the pages in your site, from the content in your Markdown files.
+### IN DEVELOPMENT
 
-### Markdown
+This game is in development and will be released the 1st of December 2018 on [https://itch.io](itch.io)
 
-Markdown is a lightweight and easy-to-use syntax for styling your writing. It includes conventions for
+### Tech
 
-```markdown
-Syntax highlighted code block
+* Engine - Unity
 
-# Header 1
-## Header 2
-### Header 3
+#### Animations
 
-- Bulleted
-- List
-
-1. Numbered
-2. List
-
-**Bold** and _Italic_ and `Code` text
-
-[Link](url) and ![Image](src)
-```
-
-For more details see [GitHub Flavored Markdown](https://guides.github.com/features/mastering-markdown/).
-
-### Jekyll Themes
-
-Your Pages site will use the layout and styles from the Jekyll theme you have selected in your [repository settings](https://github.com/eriksk/GitHubGameOff2018/settings). The name of this theme is saved in the Jekyll `_config.yml` configuration file.
-
-### Support or Contact
-
-Having trouble with Pages? Check out our [documentation](https://help.github.com/categories/github-pages-basics/) or [contact support](https://github.com/contact) and we’ll help you sort it out.
+Animations are pretty special in this game. The character is a basic ragdoll setup with joints that stick the feet to the skateboard. There is a copy of the skeleton that is driven by animations but the rendering is using the bones of the ragdoll. The ragdoll then uses torques with the attached rigid bodies to try to mimic the actual animation. This makes the ragdoll "active" more or less. It will be animated, but still have the physics applied to it.
