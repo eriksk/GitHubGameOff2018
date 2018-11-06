@@ -4,11 +4,16 @@
 
 ### IN DEVELOPMENT
 
-This game is in development and will be released the 1st of December 2018 on [https://itch.io](itch.io)
+This game is in development and will be released the 1st of December 2018 on [itch.io](https://itch.io)
 
 ### Tech
 
-* Engine - Unity
+* Game Engine - Unity
+* 3D Models - home made
+* Textures - home made
+* Music/sfx - home made
+* Animations/Physics - home made + unity
+* PostFX - Unity PostProcessing Stack
 
 #### Animations
 
