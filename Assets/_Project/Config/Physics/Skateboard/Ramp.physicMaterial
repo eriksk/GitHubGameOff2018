@@ -6,7 +6,7 @@ PhysicMaterial:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_Name: Ramp
-  dynamicFriction: 0.2
+  dynamicFriction: 0.5
   staticFriction: 0.4
   bounciness: 0.3
   frictionCombine: 0

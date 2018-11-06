@@ -1,9 +1,15 @@
 
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 
 public static class TransformExtensions
 {
+    public static Transform FindDeep(this Transform transform, string name)
+    {
+        return ChildrenDeep(transform).FirstOrDefault(x => x.name == name);
+    }
+
     public static IEnumerable<Transform> Children(this Transform transform)
     {
         for(var i = 0; i < transform.childCount; i++)
