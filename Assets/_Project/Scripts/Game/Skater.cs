@@ -102,11 +102,14 @@ public class Skater : MonoBehaviour
         if(!Skateboard.Grounded) return;
 
         var rigidbody = Skateboard.GetComponent<Rigidbody>();
-        rigidbody.AddForce(new Vector3(0f, 1f, 0f) * JumpForce * rigidbody.mass, ForceMode.Impulse);
+
+        var groundNormal = Skateboard.GroundNormal;
+
+        rigidbody.AddForce(groundNormal * JumpForce * rigidbody.mass, ForceMode.Impulse);
 
         foreach(var body in _rigidbodies)
         {
-            body.AddForce(new Vector3(0f, 1f, 0f) * JumpForce * body.mass, ForceMode.Impulse);
+            body.AddForce(groundNormal * JumpForce * body.mass, ForceMode.Impulse);
         }
     }
 
@@ -117,15 +120,32 @@ public class Skater : MonoBehaviour
 
         var rigidbody = Skateboard.GetComponent<Rigidbody>();
 
-        rigidbody.AddRelativeTorque(new Vector3(0f, 1f, 0f) * _leanHorizontal * SpinForce);
-        rigidbody.AddRelativeTorque(new Vector3(1f, 0f, 0f) * _leanVertical * PitchForce);
+        // Torque relative to board space
+        var relativeHorizontal = Skateboard.transform.TransformDirection(new Vector3(0f, 1f, 0f));
+        var relativeVertical = Skateboard.transform.TransformDirection(new Vector3(1f, 0f, 0f));
+
+        rigidbody.AddTorque(relativeHorizontal * _leanHorizontal * SpinForce);
+        rigidbody.AddTorque(relativeVertical * _leanVertical * PitchForce);
+        
+        // Also twist body a bit
+        _rootRigidbody.AddTorque(relativeHorizontal * _leanHorizontal * SpinForce * 0.5f);
+        _rootRigidbody.AddTorque(relativeVertical * _leanVertical * PitchForce * 0.5f);
     }
 
     void Update()
     {
         if(State == SkaterState.OnBoard)
         {
-            RagdollAnimator.Pinned = Skateboard.Grounded;
+            if(Input.GetKey(KeyCode.Space))
+            {
+                RagdollAnimator.Pinned = true;
+                RagdollAnimator.Pin = 0.5f;
+            }
+            else
+            {
+                RagdollAnimator.Pinned = Skateboard.Grounded;
+                RagdollAnimator.Pin = 1f;
+            }
 
             if(_boardJoints.All(x => x == null))
             {

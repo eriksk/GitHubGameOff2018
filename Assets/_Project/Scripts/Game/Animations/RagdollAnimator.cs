@@ -87,7 +87,7 @@ public class RagdollAnimator : MonoBehaviour
         {
             foreach(var pair in _pairs)
             {
-                // if(pair.AnimationPart.name == "root") continue;
+                if(pair.AnimationPart.name == "root") continue;
                 RotateTowards(pair.Rigidbody, pair.AnimationPart, pair.RagdollPart);
             }
         }

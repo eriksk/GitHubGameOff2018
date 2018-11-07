@@ -9,12 +9,16 @@ ModelImporter:
     100006: landing_ramp
     100008: ramp_legs
     100010: start_ramp
+    100012: BezierCurve
+    100014: start_tower
     400000: //RootNode
     400002: ramp
     400004: stand
     400006: landing_ramp
     400008: ramp_legs
     400010: start_ramp
+    400012: BezierCurve
+    400014: start_tower
     2100000: unnamed
     2300000: //RootNode
     2300002: ramp
@@ -22,22 +26,31 @@ ModelImporter:
     2300006: landing_ramp
     2300008: ramp_legs
     2300010: start_ramp
+    2300012: BezierCurve
+    2300014: start_tower
     3300000: //RootNode
     3300002: ramp
     3300004: stand
     3300006: landing_ramp
     3300008: ramp_legs
     3300010: start_ramp
+    3300012: BezierCurve
+    3300014: start_tower
     4300000: ramp
     4300002: stand
     4300004: landing_ramp
     4300006: ramp_legs
     4300008: start_ramp
+    4300010: BezierCurve
+    4300012: start_tower
     6400000: landing_ramp
     6400002: ramp_legs
     6400004: start_ramp
+    6400006: BezierCurve
+    6400008: start_tower
     7400000: Default Take
     9500000: //RootNode
+    2186277476908879412: ImportLogs
   externalObjects: {}
   materials:
     importMaterials: 0

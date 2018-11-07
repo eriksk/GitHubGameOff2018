@@ -12,8 +12,10 @@ public class Skateboard : MonoBehaviour
     private Rigidbody _rigidbody;
 
     public bool Grounded;
+    public Vector3 GroundNormal;
 
     public float AirTime;
+    public float WheelieTime;
 
     void Start()
     {
@@ -23,6 +25,7 @@ public class Skateboard : MonoBehaviour
     void Update()
     {
         Grounded = false;
+        var wheelsOnGround = 0;
         foreach(var wheel in Wheels)
         {
             RaycastHit hit;
@@ -30,9 +33,25 @@ public class Skateboard : MonoBehaviour
 
             if(wheel.Grounded)
             {
+                wheelsOnGround++;
                 wheel.GroundNormal = hit.normal;
+                GroundNormal = hit.normal;
                 Grounded = true;
             }
+        }
+
+        if(wheelsOnGround == 2)
+        {
+            WheelieTime += Time.deltaTime;
+            if(WheelieTime > 0.5f)
+            {
+                Debug.Log("Wheeeelie");
+            }
+            // ObjectLocator.Stats.Wheelie(wheelieTime);
+        }
+        else
+        {
+            WheelieTime = 0f;
         }
 
         if(Grounded && AirTime > 2f)
@@ -48,6 +67,7 @@ public class Skateboard : MonoBehaviour
         {
             AirTime = 0f;
         }
+
     }
 
     void FixedUpdate()
@@ -71,7 +91,7 @@ public class Skateboard : MonoBehaviour
             _rigidbody.AddForceAtPosition(
                 lateralDirection * 
                 velocityMag *
-                50f * 
+                500f * 
                 lateralMag * 
                 _rigidbody.mass, wheel.Model.position);
                 
@@ -81,7 +101,7 @@ public class Skateboard : MonoBehaviour
                 _rigidbody.mass, wheel.Model.position);
         }
 
-        _rigidbody.AddForce(transform.forward * forwardForce * _rigidbody.mass);
+        // _rigidbody.AddForce(transform.forward * forwardForce * _rigidbody.mass);
     }
 }
 
