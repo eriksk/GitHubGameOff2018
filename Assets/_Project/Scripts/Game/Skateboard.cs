@@ -22,6 +22,13 @@ public class Skateboard : MonoBehaviour
         _rigidbody = GetComponent<Rigidbody>();
     }
 
+    public void Restart(Transform startPosition)
+    {
+        _rigidbody.ClearForces();
+        transform.position = startPosition.position;
+        transform.rotation = startPosition.rotation;
+    }
+
     void Update()
     {
         Grounded = false;

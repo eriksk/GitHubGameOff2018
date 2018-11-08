@@ -32,4 +32,10 @@ public static class TransformExtensions
             yield return child;
         }
     }
+
+    public static void ClearForces(this Rigidbody rb)
+    {
+        rb.velocity = Vector3.zero;
+        rb.angularVelocity = Vector3.zero;
+    }
 }

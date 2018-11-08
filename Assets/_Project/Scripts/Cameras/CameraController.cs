@@ -8,6 +8,7 @@ public class CameraController : MonoBehaviour
     public float Height = 5f;
     public float Distance = 15f;
     public float Damping = 5f;
+    public float RotationDamping = 10f;
 
     public float FovChangeSpeed = 5f;
 
@@ -45,6 +46,13 @@ public class CameraController : MonoBehaviour
             (Vector3.up * Height);
 
         transform.position = Vector3.Lerp(transform.position, targetPosition, Damping * Time.deltaTime);
-        transform.LookAt(Target.position);
+
+        var directionToTarget = (Target.position - transform.position).normalized;
+
+        transform.rotation = Quaternion.Slerp(
+            transform.rotation,
+            Quaternion.LookRotation(directionToTarget, Vector3.up),
+            RotationDamping * Time.deltaTime
+        );
     }
 }

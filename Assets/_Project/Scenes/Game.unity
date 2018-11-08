@@ -193,6 +193,12 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 400000, guid: c19ec69144c4c1e47a57a07ea00bd3e4,
     type: 3}
   m_PrefabInternal: {fileID: 2314943}
+--- !u!114 &3208740 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 114151228262421876, guid: 323de74054a64764993c03a523b5ef7b,
+    type: 2}
+  m_PrefabInternal: {fileID: 362741574}
+  m_Script: {fileID: 11500000, guid: 996aac230fbfb6a4ba1f9421c884e623, type: 3}
 --- !u!1001 &7261926
 Prefab:
   m_ObjectHideFlags: 0
@@ -4246,6 +4252,7 @@ MonoBehaviour:
   Height: 3
   Distance: 4
   Damping: 2
+  RotationDamping: 10
   FovChangeSpeed: 3
 --- !u!1001 &550103562
 Prefab:
@@ -9668,6 +9675,7 @@ Transform:
   - {fileID: 1677229148}
   - {fileID: 193684925}
   - {fileID: 708070216}
+  - {fileID: 2048507726}
   m_Father: {fileID: 0}
   m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -13097,6 +13105,9 @@ MonoBehaviour:
   FinalDistance: 0
   CurrentDistance: 0
   AirTime: 0
+  StartPosition: {fileID: 1793888145}
+  Skater: {fileID: 3208740}
+  Skateboard: {fileID: 48102174}
   Fallen: 0
 --- !u!4 &1667717519
 Transform:
@@ -14635,13 +14646,13 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1793888144}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 304.31, z: -259.15}
+  m_LocalRotation: {x: 0.47822443, y: 0, z: 0, w: 0.8782377}
+  m_LocalPosition: {x: -0.052532095, y: 307.5, z: -259.87}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 248342153}
   m_RootOrder: 0
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_LocalEulerAnglesHint: {x: 57.139004, y: 0, z: 0}
 --- !u!1001 &1814649236
 Prefab:
   m_ObjectHideFlags: 0
@@ -15784,6 +15795,47 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 400000, guid: c19ec69144c4c1e47a57a07ea00bd3e4,
     type: 3}
   m_PrefabInternal: {fileID: 2032479008}
+--- !u!1 &2048507725
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 2048507726}
+  - component: {fileID: 2048507727}
+  m_Layer: 9
+  m_Name: FloorCollider
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &2048507726
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 2048507725}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: -0, y: -208.9, z: 348}
+  m_LocalScale: {x: 1000, y: 10, z: 1000}
+  m_Children: []
+  m_Father: {fileID: 1097623153}
+  m_RootOrder: 4
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!65 &2048507727
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 2048507725}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 1, y: 1, z: 1}
+  m_Center: {x: 0, y: 0, z: 0}
 --- !u!1001 &2058129004
 Prefab:
   m_ObjectHideFlags: 0

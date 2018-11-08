@@ -8,9 +8,33 @@ public class GameStats : MonoBehaviour
     public float CurrentDistance;
     public float AirTime;
 
+    public Transform StartPosition;
+    public Skater Skater;
+    public Skateboard Skateboard;
+
     private JumpState _jumpState = JumpState.Init;
     private Vector3 _jumpPosition, _landPosition;
     public bool Fallen;
+
+    public void Start()
+    {
+        Restart();
+    }
+
+    public void Restart()
+    {
+        _jumpState = JumpState.Init;
+        _jumpPosition = Vector3.zero;
+        _landPosition = Vector3.zero;
+        AirTime = 0f;
+        CurrentDistance = 0f;
+        FinalDistance = 0f;
+        Fallen = false;
+        
+        Skateboard.Restart(StartPosition);
+        Skater.Restart(StartPosition);
+        Time.timeScale = 1f;
+    }
 
     public void StartJump(GameObject gameObject)
     {
@@ -39,6 +63,7 @@ public class GameStats : MonoBehaviour
 
     public void PlayerFallen()
     {
+        Time.timeScale = 0.65f;
         Fallen = true;
         _landPosition = ObjectLocator.Player.CurrentPosition;
         Debug.Log("Fallen");
@@ -49,6 +74,11 @@ public class GameStats : MonoBehaviour
         if(_jumpState != JumpState.Init)
         {
             CurrentDistance = Vector3.Distance(_jumpPosition, ObjectLocator.Player.CurrentPosition);
+        }
+
+        if(Input.GetKeyDown(KeyCode.Return) || Input.GetKeyDown(KeyCode.KeypadEnter))
+        {
+            Restart();
         }
     }
 }

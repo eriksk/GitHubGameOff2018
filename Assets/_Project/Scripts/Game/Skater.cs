@@ -26,8 +26,9 @@ public class Skater : MonoBehaviour
     private float _leanVertical;
 
     private FixedJoint[] _boardJoints;
-
     private Rigidbody[] _rigidbodies;
+    private Dictionary<int, TransformState> _states;
+    private Transform[] _ragdollTransforms;
 
     public Vector3 CurrentPosition
     {
@@ -39,7 +40,30 @@ public class Skater : MonoBehaviour
 
     void Start()
     {
+        RagdollAnimator.Create();
 
+        _rootRigidbody = RagdollAnimator.Ragdoll.GetComponentInChildren<Rigidbody>();
+        _rigidbodies = RagdollAnimator.Ragdoll
+            .ChildrenDeep()
+            .Select(x => x.gameObject.GetComponent<Rigidbody>())
+            .Where(x => x != null)
+            .ToArray();
+        
+        _states = new Dictionary<int, TransformState>();
+        _ragdollTransforms = new[]{RagdollAnimator.Ragdoll}.Concat(RagdollAnimator.Ragdoll.ChildrenDeep()).ToArray();
+
+        foreach(var child in _ragdollTransforms)
+        {
+            _states.Add(child.GetInstanceID(), new TransformState(child));
+        }
+
+    }
+
+    public void Restart(Transform startPosition)
+    {
+        transform.position = startPosition.position;
+        transform.rotation = startPosition.rotation;
+        
         // Put on the freaking skateboard
         if(ConnectToSkateboard)
         {
@@ -48,11 +72,28 @@ public class Skater : MonoBehaviour
             transform.localRotation = Quaternion.Euler(0f, 90f, 0f);
             transform.SetParent(null);
         }
+        
+        foreach(var body in _rigidbodies)
+        {
+            body.ClearForces();
+        }
+        
+        foreach(var child in _ragdollTransforms)
+        {
+            _states[child.GetInstanceID()].RestoreLocal(child);
+        }
 
         State = SkaterState.OnBoard;
 
-        RagdollAnimator.Create();
-
+        if(_boardJoints != null)
+        {
+            foreach(var joint in _boardJoints)
+            {
+                if(joint == null) continue;
+                Destroy(joint);
+            }
+        }
+        
         if(ConnectToSkateboard)
         {
             _boardJoints = new[]
@@ -67,24 +108,13 @@ public class Skater : MonoBehaviour
                 joint.breakForce = FeetStickyBreakForce;
             }
         }
-
-        _rootRigidbody = RagdollAnimator.Ragdoll.GetComponentInChildren<Rigidbody>();
-        _rigidbodies = RagdollAnimator.Ragdoll
-            .ChildrenDeep()
-            .Select(x => x.gameObject.GetComponent<Rigidbody>())
-            .Where(x => x != null)
-            .ToArray();
-
-    }
-
-    public void OnCollisionEnter(Collision collision)
-    {
-        Debug.Log(collision.relativeVelocity.magnitude);
+        
+        CamController.Target = Skateboard.GetComponent<Rigidbody>();
+        CamController.transform.position = startPosition.position + (Vector3.up * 5f) + (Vector3.back * 5f);
     }
 
     public void Fall()
     {
-        // TODO: Calculate center of character instead
         CamController.Target = _rootRigidbody;
         ObjectLocator.Stats.PlayerFallen();
         State = SkaterState.Fallen;
