@@ -88,12 +88,12 @@ public class Skateboard : MonoBehaviour
             lateralDirection = Vector3.Cross(transform.forward, lateralDirection);
 
             // Debug.DrawLine(wheel.Model.position, wheel.Model.position + lateralDirection, Color.red, 0.1f);
-            _rigidbody.AddForceAtPosition(
-                lateralDirection * 
-                velocityMag *
-                500f * 
-                lateralMag * 
-                _rigidbody.mass, wheel.Model.position);
+            // _rigidbody.AddForceAtPosition(
+            //     lateralDirection * 
+            //     velocityMag *
+            //     500f * 
+            //     lateralMag * 
+            //     _rigidbody.mass, wheel.Model.position);
                 
             _rigidbody.AddForceAtPosition(
                 -wheel.GroundNormal *
@@ -101,7 +101,7 @@ public class Skateboard : MonoBehaviour
                 _rigidbody.mass, wheel.Model.position);
         }
 
-        // _rigidbody.AddForce(transform.forward * forwardForce * _rigidbody.mass);
+        _rigidbody.AddForce(transform.forward * forwardForce * 1f * _rigidbody.mass);
     }
 }
 

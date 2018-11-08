@@ -9,20 +9,27 @@ public class CameraController : MonoBehaviour
     public float Distance = 15f;
     public float Damping = 5f;
 
+    public float FovChangeSpeed = 5f;
+
+    private Camera _cam;
+    private float _fov = 60f;
+
+    void Start()
+    {
+        _cam = GetComponent<Camera>();
+        _fov = 60f;
+    }
+
+    public void FixFov(float fov)
+    {
+        _fov = fov;
+    }
+
     void Update()
     {
+        _cam.fieldOfView = Mathf.Lerp(_cam.fieldOfView, _fov, FovChangeSpeed * Time.deltaTime);
+
         if(Target == null) return;
-
-
-        // RaycastHit hit;
-        // var groundHeight = Target.position.y;
-        // if(Physics.Raycast(transform.position + Vector3.up * 20f, Vector3.down, out hit, 1000f, Ground, QueryTriggerInteraction.Ignore))
-        // {
-        //     if(hit.point.y > groundHeight)
-        //     {
-        //         groundHeight = hit.point.y;
-        //     }
-        // }
 
         var targetTransform = Target.transform;
         var forwardDirection = Target.velocity.normalized;
@@ -33,10 +40,9 @@ public class CameraController : MonoBehaviour
         }
 
         var targetPosition = 
-            targetTransform.position + 
+            (targetTransform.position + Vector3.up * 1f) + 
             (-forwardDirection * Distance) +
             (Vector3.up * Height);
-
 
         transform.position = Vector3.Lerp(transform.position, targetPosition, Damping * Time.deltaTime);
         transform.LookAt(Target.position);

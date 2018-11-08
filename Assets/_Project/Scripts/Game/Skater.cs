@@ -95,6 +95,7 @@ public class Skater : MonoBehaviour
             Destroy(joint);
         }
         _boardJoints = new FixedJoint[0];
+        CamController.FixFov(25f);
     }
 
     public void Jump()
@@ -136,6 +137,15 @@ public class Skater : MonoBehaviour
     {
         if(State == SkaterState.OnBoard)
         {
+            if(Skateboard.Grounded)
+            {
+                CamController.FixFov(40);
+            }
+            else
+            {
+                CamController.FixFov(75);
+            }
+
             if(Input.GetKey(KeyCode.Space))
             {
                 RagdollAnimator.Pinned = true;
