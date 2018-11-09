@@ -79,36 +79,46 @@ public class Skateboard : MonoBehaviour
 
     void FixedUpdate()
     {
-        var forwardForce = 0f;
         foreach(var wheel in Wheels)
         {
             if(!wheel.Grounded) continue;
-
-            forwardForce += 0.25f;
             
-            var velocity = _rigidbody.GetPointVelocity(wheel.Model.position);
-            var velocityDirection = velocity.normalized;
-            var velocityMag = velocity.magnitude;
+            var normal = wheel.GroundNormal;
 
-            var lateralDirection = Vector3.Cross(transform.forward, velocityDirection);
-            var lateralMag = Vector3.Dot(transform.forward, lateralDirection);
-            lateralDirection = Vector3.Cross(transform.forward, lateralDirection);
+            var slopeDownRightDirection = Vector3.Cross(normal, Vector3.down);
+            var slopeDownDirection = Vector3.Cross(slopeDownRightDirection, normal).normalized;
+            var slopeUpDirection = -slopeDownDirection;
 
-            // Debug.DrawLine(wheel.Model.position, wheel.Model.position + lateralDirection, Color.red, 0.1f);
-            // _rigidbody.AddForceAtPosition(
-            //     lateralDirection * 
-            //     velocityMag *
-            //     500f * 
-            //     lateralMag * 
-            //     _rigidbody.mass, wheel.Model.position);
-                
+            var slopeDotProduct = Vector3.Dot(slopeDownDirection, transform.forward);
+
+            var boardSlopeDirection = Vector3.Cross(transform.right, normal);
+            var boardForward = (transform.forward * Mathf.Sign(slopeDotProduct)).normalized;
+
+            var boardSlopeDotProduct = Vector3.Dot(slopeDownRightDirection, boardSlopeDirection);
+            
+            var carveCompensationDirection = boardSlopeDotProduct > 0f ? transform.right : -transform.right;
+            var carveCompensationMagnitude = Mathf.Abs(boardSlopeDotProduct);
+
+            Debug.DrawLine(wheel.Model.position, wheel.Model.position + carveCompensationDirection * carveCompensationMagnitude, Color.red, 3f);
+
             _rigidbody.AddForceAtPosition(
-                -wheel.GroundNormal *
-                10f *
-                _rigidbody.mass, wheel.Model.position);
-        }
+                carveCompensationDirection * 
+                carveCompensationMagnitude *
+                10f * 
+                _rigidbody.mass, 
+                wheel.Model.position);
 
-        _rigidbody.AddForce(transform.forward * forwardForce * 1f * _rigidbody.mass);
+            _rigidbody.AddForceAtPosition(
+                -normal *
+                5f *
+                _rigidbody.mass, wheel.Model.position);
+                
+            _rigidbody.AddForce(
+                transform.forward * 
+                boardSlopeDotProduct *
+                5f *
+                _rigidbody.mass);
+        }
     }
 }
 
