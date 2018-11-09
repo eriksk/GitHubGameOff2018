@@ -1,4 +1,5 @@
 using UnityEngine;
+using UnityEngine.PostProcessing;
 
 public class CameraController : MonoBehaviour
 {
@@ -15,8 +16,11 @@ public class CameraController : MonoBehaviour
     private Camera _cam;
     private float _fov = 60f;
 
+    private PostProcessingBehaviour _postFx;
+
     void Start()
     {
+        _postFx = GetComponent<PostProcessingBehaviour>();
         _cam = GetComponent<Camera>();
         _fov = 60f;
     }
@@ -54,5 +58,13 @@ public class CameraController : MonoBehaviour
             Quaternion.LookRotation(directionToTarget, Vector3.up),
             RotationDamping * Time.deltaTime
         );
+
+        var distance = Vector3.Distance(transform.position, Target.position);
+
+        var profile = _postFx.profile;
+        var dof = profile.depthOfField;
+        var dofSettings = dof.settings;
+        dofSettings.focusDistance = distance;
+        dof.settings = dofSettings;
     }
 }

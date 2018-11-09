@@ -16,6 +16,9 @@ public class GameStats : MonoBehaviour
     private Vector3 _jumpPosition, _landPosition;
     public bool Fallen;
 
+    public RecordIcon WorldRecordIcon;
+    public RecordIcon PersonalRecordIcon;
+
     public void Start()
     {
         Restart();
@@ -47,7 +50,6 @@ public class GameStats : MonoBehaviour
 
         _jumpState = JumpState.Jumped;
         _jumpPosition = position;
-        Debug.Log("Started Jump");
     }
 
     public void Landed(Vector3 position, float airTime)
@@ -58,7 +60,7 @@ public class GameStats : MonoBehaviour
         _landPosition = position;
         FinalDistance = Vector3.Distance(_jumpPosition, _landPosition);
         AirTime = airTime;
-        Debug.Log("Landed");
+        PersonalRecordIcon.SetDistance(_jumpPosition, Vector3.Distance(_jumpPosition, _landPosition));
     }
 
     public void PlayerFallen()
@@ -66,7 +68,6 @@ public class GameStats : MonoBehaviour
         Time.timeScale = 0.65f;
         Fallen = true;
         _landPosition = ObjectLocator.Player.CurrentPosition;
-        Debug.Log("Fallen");
     }
 
     void Update()

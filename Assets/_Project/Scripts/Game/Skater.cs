@@ -105,7 +105,7 @@ public class Skater : MonoBehaviour
             foreach(var joint in _boardJoints)
             {
                 joint.connectedBody = Skateboard.GetComponent<Rigidbody>();
-                joint.breakForce = FeetStickyBreakForce;
+                joint.breakTorque = FeetStickyBreakForce;
             }
         }
         

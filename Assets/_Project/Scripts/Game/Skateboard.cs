@@ -52,7 +52,7 @@ public class Skateboard : MonoBehaviour
             WheelieTime += Time.deltaTime;
             if(WheelieTime > 0.5f)
             {
-                Debug.Log("Wheeeelie");
+                // Debug.Log("Wheeeelie");
             }
             // ObjectLocator.Stats.Wheelie(wheelieTime);
         }
